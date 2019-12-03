@@ -1,7 +1,7 @@
 This docker image provides a Minecraft Plug-in Server that will automatically download the PAPER(spigot fork) selectable version at startup.
 
 # To simply use the latest stable version, run
-docker run -d -p 25565:25565 -p 80:80 --name jve ccmite/jve
+docker run -d -p 25565:25565 -p 80:80 -v /host/directory/servers:/opt/minecraft -v /host/directory/admin:/var/www/html --name jve ccmite/jve
 
 
 # Example Docker Compose app
