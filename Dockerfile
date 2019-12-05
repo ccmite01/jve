@@ -8,6 +8,7 @@ RUN : "add package" && \
     sudo \
     iproute2 \
     locales \
+    ssh \
     && apt-get clean && rm -rf /var/lib/apt/lists/* && \
     echo "www-data ALL=NOPASSWD: ALL" >> /etc/sudoers && \
     sed -i 's/# ja_JP.UTF-8 UTF-8/ja_JP.UTF-8 UTF-8/g' /etc/locale.gen && \
@@ -15,7 +16,14 @@ RUN : "add package" && \
     update-locale LANG=ja_JP.UTF-8 && \
     rm -f /etc/localtime && \
     ln -s /usr/share/zoneinfo/Japan /etc/localtime && \
-    echo "Asia/Tokyo" > /etc/timezone
+    echo "Asia/Tokyo" > /etc/timezone && \
+    ln -s /opt/minecraft/ssh/authorized_keys /etc/ssh/authorized_keys && \
+    sed -i 's/#Port 22/Port 25575/g' /etc/ssh/sshd_config && \
+    sed -i 's/#ListenAddress 0.0.0.0/ListenAddress 0.0.0.0/g' /etc/ssh/sshd_config && \
+    sed -i 's/#PubkeyAuthentication yes/PubkeyAuthentication yes/g' /etc/ssh/sshd_config && \
+    sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config && \
+    sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config && \
+    echo "AuthorizedKeysFile /etc/ssh/authorized_keys" >> /etc/ssh/sshd_config
 
 RUN : "add java" && \
     mkdir -p /usr/lib/jvm && \
