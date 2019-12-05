@@ -12,4 +12,9 @@ if [ ! -e papermc-${MC_VERSION}-${MC_PAPER_BUILD}.jar ]
    chown -R www-data:www-data *
 fi
 screen -S apc /usr/sbin/apachectl start
+mkdir -p /opt/minecraft/ssh
+touch /opt/minecraft/ssh/authorized_keys
+chown root:root /opt/minecraft/ssh/authorized_keys
+chmod 600 /opt/minecraft/ssh/authorized_keys
+screen -S ssh /etc/init.d/ssh start
 screen -S mcs su -s /bin/bash - www-data -c "export $TZ=JST-9; export $LANG=ja_JP.UTF-8; cd /opt/minecraft/${MC_INSTANCE_NAME}; /usr/bin/java -server -Xms${MC_RAM} -Xmx${MC_RAM} -XX:MetaspaceSize=512M -XX:+UseG1GC -XX:+UseStringDeduplication -XX:+DisableExplicitGC -XX:+UseCompressedOops -XX:+OptimizeStringConcat -XX:MaxGCPauseMillis=50 -XX:+UseTLAB -XX:ParallelGCThreads=${MC_CPU_CORE} -jar papermc-${MC_VERSION}-${MC_PAPER_BUILD}.jar nogui"
