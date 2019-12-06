@@ -12,7 +12,7 @@ docker run -d -p 25565:25565 -p 80:80 -v /host/directory/servers:/opt/minecraft 
 <pre>
 version: '2'
 services:
-# Minecraft Server ###################################################
+# C.C.mite Server ###################################################
   jve:
     image: ccmite/jve:latest
     container_name: jve
@@ -22,37 +22,63 @@ services:
     ports:
       - '0.0.0.0:25565:25565'
       - '0.0.0.0:25575:25575'
-      - '0.0.0.0:80:80'
+      - '0.0.0.0:25555:22'
+      - '0.0.0.0:8443:80'
+      - '0.0.0.0:8123:8123'
+      - '0.0.0.0:8192:8192'
     volumes:
       - '/host/directory/servers:/opt/minecraft'
       - '/host/directory/admin:/var/www/html'
+      - '/host/directory/map:/opt/minecraft/ccmite/plugins/dynmap/web'
     environment:
       MC_INSTANCE_NAME: paper
       MC_VERSION: 1.14.4
-      MC_PAPER_BUILD: 233
-      MC_RAM: 4G
+      MC_PAPER_BUILD: 226
+      MC_RAM: 2G
       MC_CPU_CORE: 1
       LANG: ja-JP.UTF-8
-    mem_limit: 5g
+    mem_limit: 3g
     depends_on:
-      - db
+      - cpr
 # CoreProtect DB Server ##############################################
-  db:
+  cpr:
     image: ccmite/db:latest
-    container_name: db
-    hostname: db
+    container_name: cpr
+    hostname: cpr
     tty: true
     restart: always
     ports:
-      - '0.0.0.0:3306:3306'
+      - '0.0.0.0:3307:3306'
     volumes:
-      - '/host/directory/db:/var/lib/mysql'
+      - '/host/directory/coreprotectdb:/var/lib/mysql'
     environment:
-      MARIADB_ROOT_PASSWORD: secretpass
+      MARIADB_ROOT_PASSWORD: SecretPassword
       MARIADB_DATABASE: coreprotect
       MARIADB_INITDB_SKIP_TZINFO: "true"
       LANG: ja-JP.UTF-8
     mem_limit: 256m
+# Restart and Cloud Backup Server ###################################################
+  bks:
+    image: ccmite/bks:latest
+    container_name: bks
+    hostname: bks
+    tty: true
+    restart: always
+   
+    volumes:
+      - '/host/directory/servers:/opt/minecraft'
+      - '/host/directory/bkup:/var/spool/cron'
+      - '/var/run/docker.sock:/var/run/docker.sock'
+    environment:
+      LANG: ja-JP.UTF-8
+      MC_SRVIP: 192.168.0.100
+      MC_SSH: /usr/bin/ssh
+      MC_SSHPORT: 25555
+      MC_USER: root
+      MC_RCON: /usr/bin/mcrcon
+      MC_RCONPORT: 25575
+      MC_RCONPASS: SecretPassword
+    mem_limit: 128m
 </pre>
 
 
