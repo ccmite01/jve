@@ -18,7 +18,7 @@ RUN : "add package" && \
     ln -s /usr/share/zoneinfo/Japan /etc/localtime && \
     echo "Asia/Tokyo" > /etc/timezone && \
     ln -s /opt/minecraft/ssh/authorized_keys /etc/ssh/authorized_keys && \
-    sed -i 's/#Port 22/Port 25575/g' /etc/ssh/sshd_config && \
+    sed -i 's/#Port 22/Port 22/g' /etc/ssh/sshd_config && \
     sed -i 's/#ListenAddress 0.0.0.0/ListenAddress 0.0.0.0/g' /etc/ssh/sshd_config && \
     sed -i 's/#PubkeyAuthentication yes/PubkeyAuthentication yes/g' /etc/ssh/sshd_config && \
     sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config && \
@@ -40,4 +40,5 @@ ENV MC_VERSION="1.14.4" MC_PAPER_BUILD="latest" MC_RAM="2G" MC_CPU_CORE="1" MC_I
 
 #ENTRYPOINT ["tail", "-f", "/dev/null"]
 ENTRYPOINT ["sh", "/start.sh"]
-EXPOSE 25565 25575 80 8123 8192
+EXPOSE 22 25565 25575 80 8123 8192
+
