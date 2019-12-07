@@ -36,9 +36,8 @@ RUN : "add java" && \
 COPY start.sh /
 RUN chmod +x /start.sh
 
-ENV MC_VERSION="1.14.4" MC_PAPER_BUILD="latest" MC_RAM="2G" MC_CPU_CORE="1" MC_INSTANCE_NAME="default"
+ENV MC_VERSION="1.14.4" MC_PAPER_BUILD="latest" MC_RAM="4G" MC_CPU_CORE="1" MC_INSTANCE_NAME="paper"
 
 #ENTRYPOINT ["tail", "-f", "/dev/null"]
 ENTRYPOINT ["sh", "/start.sh"]
 EXPOSE 22 25565 25575 80 8123 8192
-
