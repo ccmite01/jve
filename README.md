@@ -84,25 +84,12 @@ services:
 </pre>
 
 
-# Example WebConsole
+# WebConsole
 
-* https://github.com/SuperPykkon/minecraft-server-web-console
-
-download minecraft-server-web-console-master.zip
-unzip and copy to /host/directory/admin
-
-edit line 3to7 config/config.php
-
+*  fork https://github.com/SuperPykkon/minecraft-server-web-console
 <pre>
-define("SERVER_NAME", "example");
-define("SERVER_IP", "127.0.0.1");
-define("SERVER_PORT", "25565");
-
-define("SERVER_ROOT_DIR", "/opt/minecraft/paper/");
-define("SERVER_LOG_DIR", SERVER_ROOT_DIR . "logs/latest.log");
+http://serverIP:8443/console/
+username: admin
+password: do_not_copy_and_paste
 </pre>
 
-edit line 10 exec.php
-<pre>
-$ss = shell_exec("ss -tulpn | grep :25565");
-</pre>
