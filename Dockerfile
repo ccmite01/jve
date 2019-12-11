@@ -2,6 +2,9 @@ FROM php:7.4.0-apache-buster
 LABEL maintainer="ccmite"
 WORKDIR /
 
+COPY start.sh /
+COPY console.tar.gz /
+
 RUN : "add package" && \
     apt --allow-releaseinfo-change update && apt install -y \
     screen \
@@ -23,21 +26,18 @@ RUN : "add package" && \
     sed -i 's/#PubkeyAuthentication yes/PubkeyAuthentication yes/g' /etc/ssh/sshd_config && \
     sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config && \
     sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config && \
-    echo "AuthorizedKeysFile /etc/ssh/authorized_keys" >> /etc/ssh/sshd_config
-
-RUN : "add java" && \
+    echo "AuthorizedKeysFile /etc/ssh/authorized_keys" >> /etc/ssh/sshd_config && \
     mkdir -p /usr/lib/jvm && \
     cd /usr/lib/jvm && \
     curl -s -k -L --tlsv1.2 https://github.com/AdoptOpenJDK/openjdk13-binaries/releases/download/jdk-13%2B33_openj9-0.16.0/OpenJDK13U-jre_x64_linux_openj9_13_33_openj9-0.16.0.tar.gz -o jdk.tar.gz && \
     tar -xzf jdk.tar.gz && \
     rm -f jdk.tar.gz && \
-    update-alternatives --install "/usr/bin/java" "java" "/usr/lib/jvm/jdk-13+33-jre/bin/java" 1
-
-COPY start.sh /
-RUN chmod +x /start.sh
+    update-alternatives --install "/usr/bin/java" "java" "/usr/lib/jvm/jdk-13+33-jre/bin/java" 1 && \
+    chmod +x /start.sh
 
 ENV MC_VERSION="1.14.4" MC_PAPER_BUILD="latest" MC_RAM="4G" MC_CPU_CORE="1" MC_INSTANCE_NAME="paper"
 
 #ENTRYPOINT ["tail", "-f", "/dev/null"]
 ENTRYPOINT ["sh", "/start.sh"]
 EXPOSE 22 25565 25575 80 8123 8192
+

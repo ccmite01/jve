@@ -4,6 +4,13 @@ if [ ! -d /opt/minecraft/${MC_INSTANCE_NAME} ]
     mkdir -p /opt/minecraft/${MC_INSTANCE_NAME}
     chown www-data:www-data /opt/minecraft/${MC_INSTANCE_NAME}
 fi
+
+if [ ! -d /var/www/html/console ]
+    then
+    tar -x -v -f /console.tar.gz /var/www/html/
+    chmod +x /var/www/html/console/*.sh
+fi
+
 cd /opt/minecraft/${MC_INSTANCE_NAME}
 if [ ! -e papermc-${MC_VERSION}-${MC_PAPER_BUILD}.jar ]
   then
