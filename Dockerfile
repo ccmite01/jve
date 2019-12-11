@@ -12,6 +12,8 @@ RUN : "add package" && \
     iproute2 \
     locales \
     ssh \
+    dnsutils \
+    whois \
     && apt-get clean && rm -rf /var/lib/apt/lists/* && \
     echo "www-data ALL=NOPASSWD: ALL" >> /etc/sudoers && \
     sed -i 's/# ja_JP.UTF-8 UTF-8/ja_JP.UTF-8 UTF-8/g' /etc/locale.gen && \
