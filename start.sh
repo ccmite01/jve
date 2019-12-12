@@ -12,8 +12,8 @@ if [ ! -d /var/www/html/console ]
     sed -i "s/ccmite/${MC_INSTANCE_NAME}/g" /var/www/html/console/config/config.php
 fi
 
-result=`grep "ROUTER" /etc/hosts`
-if [ -n "${result}" ]; then
+grep "ROUTER" /etc/hosts
+if [ $? == 1 ]; then
     echo "192.168.0.1 ROUTER" >> /etc/hosts
 fi
 
