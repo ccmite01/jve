@@ -38,9 +38,8 @@ RUN : "add package" && \
     update-alternatives --install "/usr/bin/java" "java" "/usr/lib/jvm/jdk-13+33-jre/bin/java" 1 && \
     chmod +x /start.sh && \
     echo "nicname 43/tcp whois" >> /etc/services && \
-    echo "nicname 43/udp whois" >> /etc/services && \
-    echo "192.168.0.1 ROUTER" >> /etc/hosts
-
+    echo "nicname 43/udp whois" >> /etc/services
+    
 ENV MC_VERSION="1.14.4" MC_PAPER_BUILD="latest" MC_RAM="4G" MC_CPU_CORE="1" MC_INSTANCE_NAME="paper"
 
 #ENTRYPOINT ["tail", "-f", "/dev/null"]
