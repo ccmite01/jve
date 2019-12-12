@@ -14,6 +14,7 @@ RUN : "add package" && \
     ssh \
     dnsutils \
     whois \
+    mtr \
     && apt-get clean && rm -rf /var/lib/apt/lists/* && \
     echo "www-data ALL=NOPASSWD: ALL" >> /etc/sudoers && \
     sed -i 's/# ja_JP.UTF-8 UTF-8/ja_JP.UTF-8 UTF-8/g' /etc/locale.gen && \
@@ -37,10 +38,12 @@ RUN : "add package" && \
     update-alternatives --install "/usr/bin/java" "java" "/usr/lib/jvm/jdk-13+33-jre/bin/java" 1 && \
     chmod +x /start.sh && \
     echo "nicname 43/tcp whois" >> /etc/services && \
-    echo "nicname 43/udp whois" >> /etc/services
+    echo "nicname 43/udp whois" >> /etc/services && \
+    echo "192.168.0.1 ROUTER" >> /etc/hosts
 
 ENV MC_VERSION="1.14.4" MC_PAPER_BUILD="latest" MC_RAM="4G" MC_CPU_CORE="1" MC_INSTANCE_NAME="paper"
 
 #ENTRYPOINT ["tail", "-f", "/dev/null"]
 ENTRYPOINT ["sh", "/start.sh"]
 EXPOSE 22 25565 25575 80 8123 8192
+
