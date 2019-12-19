@@ -39,9 +39,8 @@ RUN : "add package" && \
     chmod +x /start.sh && \
     echo "nicname 43/tcp whois" >> /etc/services && \
     echo "nicname 43/udp whois" >> /etc/services && \
-    cp -p /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini && \
-    sed -i 's/;date.timezone =/date.timezone = "Asia\/Tokyo"/g' /usr/local/etc/php/php.ini && \
-    sed -i 's/;mbstring.language = Japanese/mbstring.language = Japanese/g' /usr/local/etc/php/php.ini
+    echo '[Date]' > /usr/local/etc/php/php.ini  && \
+    echo 'date.timezone = "Asia/Tokyo"' >> /usr/local/etc/php/php.ini
 
 ENV MC_VERSION="1.14.4" MC_PAPER_BUILD="latest" MC_RAM="4G" MC_CPU_CORE="1" MC_INSTANCE_NAME="paper"
 
