@@ -41,19 +41,10 @@ RUN : "add package" && \
     echo "nicname 43/udp whois" >> /etc/services && \
     cp -p /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini && \
     sed -i 's/;date.timezone =/date.timezone = "Asia\/Tokyo"/g' /usr/local/etc/php/php.ini && \
-    sed -i 's/;mbstring.language = Japanese/mbstring.language = Japanese/g' /usr/local/etc/php/php.ini && \
-    sed -i 's/;mbstring.internal_encoding =/mbstring.internal_encoding = UTF-8/g' /usr/local/etc/php/php.ini && \
-    sed -i 's/;mbstring.http_input =/mbstring.http_input = pass/g' /usr/local/etc/php/php.ini && \
-    sed -i 's/;mbstring.http_output =/mbstring.http_output = pass/g' /usr/local/etc/php/php.ini && \
-    sed -i 's/;mbstring.encoding_translation = Off/mbstring.encoding_translation = Off/g' /usr/local/etc/php/php.ini && \
-    sed -i 's/;mbstring.detect_order = auto/mbstring.detect_order = auto/g' /usr/local/etc/php/php.ini && \
-    sed -i 's/;mbstring.substitute_character = none/mbstring.substitute_character = none/g' /usr/local/etc/php/php.ini && \
-    sed -i 's/;mbstring.func_overload = 0/mbstring.func_overload = 0/g' /usr/local/etc/php/php.ini && \
-    sed -i 's/;mbstring.strict_detection = On/mbstring.strict_detection = Off/g' /usr/local/etc/php/php.ini
+    sed -i 's/;mbstring.language = Japanese/mbstring.language = Japanese/g' /usr/local/etc/php/php.ini
 
 ENV MC_VERSION="1.14.4" MC_PAPER_BUILD="latest" MC_RAM="4G" MC_CPU_CORE="1" MC_INSTANCE_NAME="paper"
 
 #ENTRYPOINT ["tail", "-f", "/dev/null"]
 ENTRYPOINT ["sh", "/start.sh"]
 EXPOSE 22 25565 25575 80 8123 8192
-
