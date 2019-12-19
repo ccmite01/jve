@@ -86,10 +86,9 @@ services:
 
 # WebConsole
 
-*  fork https://github.com/SuperPykkon/minecraft-server-web-console
+*  Forked from SuperPykkon/minecraft-server-web-console
 <pre>
 http://serverIP:8443/console/
 username: admin
 password: do_not_copy_and_paste
 </pre>
-
