@@ -12,8 +12,6 @@ if [ ! -d /var/www/html/console ]
     sed -i "s/ccmite/${MC_INSTANCE_NAME}/g" /var/www/html/console/config/config.php
 fi
 
-echo "192.168.0.1 ROUTER" >> /etc/hosts
-
 cd /opt/minecraft/${MC_INSTANCE_NAME}
 if [ ! -e papermc-${MC_VERSION}-${MC_PAPER_BUILD}.jar ]
   then
