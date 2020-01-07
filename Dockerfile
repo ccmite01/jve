@@ -32,10 +32,10 @@ RUN : "add package" && \
     echo "AuthorizedKeysFile /etc/ssh/authorized_keys" >> /etc/ssh/sshd_config && \
     mkdir -p /usr/lib/jvm && \
     cd /usr/lib/jvm && \
-    curl -s -k -L --tlsv1.2 https://github.com/AdoptOpenJDK/openjdk13-binaries/releases/download/jdk-13%2B33_openj9-0.16.0/OpenJDK13U-jre_x64_linux_openj9_13_33_openj9-0.16.0.tar.gz -o jdk.tar.gz && \
+    curl -s -k -L --tlsv1.2 https://github.com/AdoptOpenJDK/openjdk13-binaries/releases/download/jdk-13.0.1%2B9/OpenJDK13U-jre_x64_linux_hotspot_13.0.1_9.tar.gz -o jdk.tar.gz && \
     tar -xzf jdk.tar.gz && \
     rm -f jdk.tar.gz && \
-    update-alternatives --install "/usr/bin/java" "java" "/usr/lib/jvm/jdk-13+33-jre/bin/java" 1 && \
+    update-alternatives --install "/usr/bin/java" "java" "/usr/lib/jvm/jdk-13.0.1+9-jre/bin/java" 1 && \
     chmod +x /start.sh && \
     echo "nicname 43/tcp whois" >> /etc/services && \
     echo "nicname 43/udp whois" >> /etc/services && \
