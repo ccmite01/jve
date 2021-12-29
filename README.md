@@ -32,8 +32,8 @@ services:
       - '/opt/minecraft/dynmapweb:/opt/minecraft/paper/plugins/dynmap/web'
     environment:
       MC_INSTANCE_NAME: paper
-      MC_VERSION: 1.14.4
-      MC_PAPER_BUILD: 230
+      MC_VERSION: 1.18.1
+      MC_PAPER_BUILD: 110
       MC_RAM: 4G
       MC_CPU_CORE: 2
       LANG: ja-JP.UTF-8
