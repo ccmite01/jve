@@ -32,10 +32,10 @@ RUN : "add package" && \
     echo "AuthorizedKeysFile /etc/ssh/authorized_keys" >> /etc/ssh/sshd_config && \
     mkdir -p /usr/lib/jvm && \
     cd /usr/lib/jvm && \
-    curl -s -k -L --tlsv1.2 https://github.com/AdoptOpenJDK/openjdk13-binaries/releases/download/jdk-13.0.1%2B9/OpenJDK13U-jre_x64_linux_hotspot_13.0.1_9.tar.gz -o jdk.tar.gz && \
+    curl -s -k -L --tlsv1.2 https://github.com/AdoptOpenJDK/semeru17-binaries/releases/download/jdk-17.0.1%2B12_openj9-0.29.1/ibm-semeru-open-jre_x64_linux_17.0.1_12_openj9-0.29.1.tar.gz -o jdk.tar.gz && \
     tar -xzf jdk.tar.gz && \
     rm -f jdk.tar.gz && \
-    update-alternatives --install "/usr/bin/java" "java" "/usr/lib/jvm/jdk-13.0.1+9-jre/bin/java" 1 && \
+    update-alternatives --install "/usr/bin/java" "java" "/usr/lib/jvm/jdk-17.0.1+12-jre/bin/java" 1 && \
     chmod +x /start.sh && \
     echo "nicname 43/tcp whois" >> /etc/services && \
     echo "nicname 43/udp whois" >> /etc/services && \
@@ -44,7 +44,7 @@ RUN : "add package" && \
     sed -i 's/80>/8443>/g' /etc/apache2/sites-available/000-default.conf && \
     sed -i 's/Listen 80/Listen 8443/g' /etc/apache2/ports.conf
 
-ENV MC_VERSION="1.14.4" MC_PAPER_BUILD="latest" MC_RAM="4G" MC_CPU_CORE="1" MC_INSTANCE_NAME="paper"
+ENV MC_VERSION="1.18.1" MC_PAPER_BUILD="latest" MC_RAM="4G" MC_CPU_CORE="1" MC_INSTANCE_NAME="paper"
 
 ENTRYPOINT ["sh", "/start.sh"]
 EXPOSE 22 25566 25575 8443 8123 8192
