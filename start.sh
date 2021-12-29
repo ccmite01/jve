@@ -15,7 +15,7 @@ fi
 cd /opt/minecraft/${MC_INSTANCE_NAME}
 if [ ! -e papermc-${MC_VERSION}-${MC_PAPER_BUILD}.jar ]
 	  then
-		     curl -s -k --tlsv1.2 https://papermc.io/api/v1/paper/${MC_VERSION}/${MC_PAPER_BUILD}/download -o papermc-${MC_VERSION}-${MC_PAPER_BUILD}.jar
+		     curl -s -k --tlsv1.2 https://papermc.io/api/v2/projects/paper/versions/${MC_VERSION}/builds/${MC_PAPER_BUILD}/downloads/paper-${MC_VERSION}-${MC_PAPER_BUILD}.jar -o papermc-${MC_VERSION}-${MC_PAPER_BUILD}.jar
 		        echo 'eula=true' > eula.txt
 			   chown -R www-data:www-data *
 fi
